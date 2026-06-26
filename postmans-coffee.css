@@ -1,0 +1,331 @@
+@import url('https://fonts.cdnfonts.com/css/neue-montreal');
+
+:root {
+  --nav-height: 75px;
+  --nav-bg: rgba(26, 26, 26, 0.215);
+  --divider: rgba(255,255,255,.08);
+  --text-main: rgba(255,255,255,.9);
+  --text-sub: rgba(255, 255, 255, 0.574);
+}
+
+:root {
+  --bg-base:       oklch(14.958% 0.00002 271.152);
+  --grain-opacity: 0.05;
+}
+
+/* ─── Root ─── */
+body,
+.bg-texture {
+  position: relative;
+  background-color: var(--bg-base);
+  overflow-x: hidden;
+}
+
+/* ─── Layer 1: Film Grain ─── */
+body::before,
+.bg-texture::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  width: 140%;
+  height: 140%;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 300px 600px;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: soft-light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* FULL NAV STRIP */
+.nav-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+
+  background: var(--nav-bg);
+
+  z-index: auto;
+}
+
+/* ALL ZONES */
+.nav-zone {
+  position: relative;
+  padding: 18px 20px;
+}
+
+/* vertical dividers */
+.nav-zone:not(:last-child) {
+  border-right: 2px solid var(--divider);
+}
+
+/* LEFT */
+.nav-zone--left {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.nav-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-identity__name {
+  font-family: "Neue Montreal", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+.nav-identity__role {
+  font-family: "Neue Montreal", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text-sub);
+}
+
+/* CENTER EMPTY */
+.nav-zone--center {
+  min-width: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RIGHT */
+.nav-zone--right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: Left;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.nav-links a {
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-link__index {
+  font-size: 9px;
+  color: rgba(255,255,255,.25);
+  min-width: 18px;
+}
+
+.nav-link__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,.55);
+}
+
+.nav-links a:hover .nav-link__label {
+  color: rgba(255,255,255,.95);
+}
+/* ==========================
+   Project Page System
+========================== */
+
+.project-page {
+  position: relative;
+  z-index: 5;
+
+  padding: 120px 45px;
+  color: rgba(255,255,255,.9);
+}
+
+.project-header {
+  max-width: 1100px;
+  padding-top: 48px;
+  margin-bottom: 64px;
+}
+
+.project-kicker {
+  display: flex;
+  gap: 18px;
+
+  margin-bottom: 24px;
+
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,.42);
+}
+
+.project-kicker span:last-child {
+  color: #D89A3D;
+}
+
+.project-header h1 {
+  margin: 0 0 24px 0;
+
+  font-size: clamp(56px, 9vw, 140px);
+  line-height: .88;
+
+  color: rgba(255,255,255,.94);
+}
+
+.project-subtitle {
+  max-width: 640px;
+
+  font-size: 18px;
+  line-height: 1.45;
+
+  color: rgba(255,255,255,.58);
+}
+
+/* ── Hero image: constrained, no forced aspect ratio ── */
+.project-hero-image {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 64px auto;
+  border: 1px solid rgba(255,255,255,.08);
+  overflow: hidden;
+  background: rgba(255,255,255,.02);
+}
+
+.project-hero-image img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  display: block;
+  object-fit: scale-down;
+}
+
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  padding: 24px 0 80px;
+
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.project-meta span,
+.section-label {
+  display: block;
+
+  margin-bottom: 18px;
+
+  font-size: 11px;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  color: #D89A3D;
+}
+
+.project-meta p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  color: rgba(255,255,255,.72);
+}
+
+.project-copy {
+  max-width: 760px;
+  margin-bottom: 80px;
+}
+
+.project-copy p {
+  margin: 0;
+
+  max-width: 780px;
+
+  font-size: clamp(18px, 1.4vw, 22px);
+
+  line-height: 1.65;
+
+  color: rgba(255,255,255,.76);
+}
+
+.artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.artifact-grid img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.project-next {
+  max-width: 1100px;
+  margin: 120px auto 0;
+
+  padding-top: 32px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.project-back,
+.project-next-link {
+  text-decoration: none;
+  color: rgba(255,255,255,.55);
+
+  transition: color .2s ease;
+}
+
+.project-back {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.project-next-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.project-next-link span {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+
+.project-next-link strong {
+  font-size: 22px;
+  font-weight: 500;
+  color: rgba(255,255,255,.82);
+}
+
+.project-back:hover,
+.project-next-link:hover strong {
+  color: #D89A3D;
+}
